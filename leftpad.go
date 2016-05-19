@@ -1,6 +1,9 @@
 package leftpad
 
-import "strings"
+import (
+	"strings"
+	"unicode/utf8"
+)
 
 // Leftpad ...
 func Leftpad(s string, length int, ch ...rune) string {
@@ -8,7 +11,7 @@ func Leftpad(s string, length int, ch ...rune) string {
 	if len(ch) > 0 {
 		c = ch[0]
 	}
-	l := length - len(s)
+	l := length - utf8.RuneCountInString(s)
 	if l > 0 {
 		s = strings.Repeat(string(c), l) + s
 	}
